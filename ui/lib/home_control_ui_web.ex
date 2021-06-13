@@ -22,7 +22,6 @@ defmodule HomeControlUiWeb do
       use Phoenix.Controller, namespace: HomeControlUiWeb
 
       import Plug.Conn
-      import HomeControlUiWeb.Gettext
       alias HomeControlUiWeb.Router.Helpers, as: Routes
     end
   end
@@ -54,7 +53,6 @@ defmodule HomeControlUiWeb do
   def channel do
     quote do
       use Phoenix.Channel
-      import HomeControlUiWeb.Gettext
     end
   end
 
@@ -63,8 +61,6 @@ defmodule HomeControlUiWeb do
       # Import basic rendering functionality (render, render_layout, etc)
       import Phoenix.View
 
-      import HomeControlUiWeb.ErrorHelpers
-      import HomeControlUiWeb.Gettext
       alias HomeControlUiWeb.Router.Helpers, as: Routes
     end
   end

@@ -11,11 +11,13 @@ defmodule HomeControlUiWeb.Router do
 
   scope "/api", HomeControlUiWeb do
     pipe_through :api
+    resources "/lights", LightController, except: [:new, :edit]
   end
 
+  # entry points
   scope "/", HomeControlUiWeb do
     pipe_through :browser
-    get "/", RootController, :index
+    get "/", PageController, :index
   end
 
   # Enables LiveDashboard only for development

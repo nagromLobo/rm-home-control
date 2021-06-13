@@ -33,6 +33,7 @@ defmodule HomeControlNerves.MixProject do
       # Dependencies for all targets
       {:home_control_ui, path: "../ui"},
       {:nerves, "~> 1.7.0", runtime: false},
+      {:dialyxir, "~> 1.1.0", only: [:dev], runtime: false},
       {:shoehorn, "~> 0.7.0"},
       {:ring_logger, "~> 0.8.1"},
       {:toolshed, "~> 0.2.13"},

@@ -24,7 +24,7 @@ defmodule HomeControlUiWeb.Endpoint do
     at: "/",
     from: :home_control_ui,
     gzip: false,
-    only: ~w(css fonts images js favicon.ico robots.txt)
+    only: ~w(dist css fonts images js favicon.ico robots.txt)
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
