@@ -1,3 +1,17 @@
 {
-    "elixirLS.projectDir": "nerves"
+    "elixirLS.projectDir": "nerves",
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/bower_components": true,
+        "**/*.code-search": true,
+        "**/priv/static": true,
+    },
+    "[typescript]": {
+        "editor.formatOnSave": false,
+    },
+    "editor.codeActionsOnSave": {
+        "source.fixAll": true
+    },
+    "editor.formatOnSave": true,
+    "eslint.format.enable": true,
 }

@@ -1,0 +1,90 @@
+{
+    "extends": [
+        "prettier",
+        "plugin:prettier/recommended",
+        "plugin:import/errors",
+        "plugin:import/typescript"
+    ],
+    "env": {
+        "browser": true
+    },
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "project": "./ui/assets/tsconfig.json",
+        "ecmaVersion": 2019,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true
+        }
+    },
+    "rules": {
+        // Use the prettier rules
+        "prettier/prettier": [
+            "error",
+            {
+                "trailingComma": "es5",
+                "singleQuote": true,
+                "jsxSingleQuote": true,
+                "printWidth": 100
+            }
+        ],
+        // Allow for single export names if there's just one (export const thing = 'string')
+        "import/prefer-default-export": 0,
+        // Allow warn and error console usage for exceptional (but handled) cases.
+        "no-console": [
+            "warn",
+            {
+                "allow": [
+                    "warn",
+                    "error"
+                ]
+            }
+        ],
+        // React default hooks rules
+        "react-hooks/rules-of-hooks": 2,
+        // Everything in a hook should be in a dep
+        "react-hooks/exhaustive-deps": 1,
+        // Allow for just nesting inputs in labels. Works just as well for accessibility and makes component reuse easier
+        "jsx-a11y/label-has-associated-control": [
+            2,
+            {
+                "assert": "either" // default is "both"
+            }
+        ],
+        // Keep consistent order of imports for styles
+        "import/order": [
+            2,
+            {
+                "groups": [
+                    "external",
+                    "internal",
+                    [
+                        "parent",
+                        "sibling"
+                    ]
+                ],
+                "pathGroups": [
+                    {
+                        "pattern": "*.less",
+                        "group": "index",
+                        "patternOptions": {
+                            "matchBase": true
+                        },
+                        "position": "after"
+                    },
+                    {
+                        "pattern": "common/*",
+                        "group": "internal",
+                        "position": "before"
+                    }
+                ],
+                "newlines-between": "always"
+            }
+        ]
+    },
+    "plugins": [
+        "prettier",
+        "jsx-a11y",
+        "react-hooks"
+    ]
+}

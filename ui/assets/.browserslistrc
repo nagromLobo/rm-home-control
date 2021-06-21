@@ -1,0 +1,6 @@
+# Browsers that our JS/CSS transpilation target
+
+> 0.2%  # Browsers with this much market share
+last 2 versions  # Last X versions
+not dead  # Browsers without official support or updates
+IE 10  # This rascal

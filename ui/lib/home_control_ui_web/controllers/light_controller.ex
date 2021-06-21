@@ -21,7 +21,7 @@ defmodule HomeControlUiWeb.LightController do
   end
 
   def show(conn, %{"id" => id}) do
-    with {:ok, %Light{} = light} <- Lhights.get_light(id) do
+    with {:ok, %Light{} = light} <- Lights.get_light(id) do
       render(conn, "show.json", light: light)
     end
   end
