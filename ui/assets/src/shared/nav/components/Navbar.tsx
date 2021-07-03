@@ -10,8 +10,7 @@ const Navbar = () => {
   return (
     <AppBar position='static'>
       <Toolbar>
-        <div className={styles.large}>meow</div>{' '}
-        <LightInfo light={{ id: 'hue-1', is_on: true }}></LightInfo>
+        <div className={styles.large}>Home Control</div>{' '}
       </Toolbar>
     </AppBar>
   );

@@ -1,13 +1,26 @@
-import React from "react";
-import { Light } from "../types";
-import styles from "./LightInfo.module.less";
+import React from 'react';
+
+import Loading from '../../shared/layout/components/Loading';
+import { useUpdateLightMutation } from '../remoteState';
+import { LightType } from '../types';
+
+import styles from './LightInfo.module.less';
 
 type LightInfoProps = {
-  light: Light;
+  light: LightType;
 };
 
 const LightInfo = ({ light }: LightInfoProps) => {
-  return <div className={`${light.is_on ? styles.on : ""}`}>{light.id}</div>;
+  const { mutate: updateLight, isLoading: isUpdating } = useUpdateLightMutation(light.id);
+
+  return (
+    <button
+      className={`${light.is_on ? styles.on : ''}`}
+      onClick={() => updateLight({ is_on: !!light.is_on })}
+    >
+      {isUpdating ? <Loading /> : light.id}
+    </button>
+  );
 };
 
 export default LightInfo;

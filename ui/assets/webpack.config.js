@@ -1,13 +1,15 @@
-const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlPlugin = require('html-webpack-plugin');
+
+const path = require('path');
 
 module.exports = (env, options) => {
   const devMode = options.mode !== 'production';
 
   return {
     entry: './src/index.tsx',
+    devtool: 'source-map',
     module: {
       rules: [
         {
@@ -64,7 +66,7 @@ module.exports = (env, options) => {
     output: {
       filename: 'bundle.js',
       path: path.resolve(__dirname, '../priv/static/dist'),
-      publicPath: '/dist'
+      publicPath: '/dist',
     },
     plugins: [
       new HtmlPlugin({ template: './src/index.html' }),
@@ -76,6 +78,6 @@ module.exports = (env, options) => {
       new CopyPlugin({
         patterns: [{ from: 'static/', to: '../' }],
       }),
-    ]
-  }
+    ],
+  };
 };

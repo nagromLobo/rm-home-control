@@ -11,13 +11,14 @@
     "phoenix": "file:../deps/phoenix",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-query": "^3.17.2"
+    "react-query": "^3.17.2",
+    "source-map": "^0.7.3"
   },
   "devDependencies": {
     "@babel/core": "^7.14.6",
     "@babel/preset-env": "^7.14.5",
     "@material-ui/types": "^5.1.0",
-    "@types/react-dom": "^17.0.8",
+    "@types/react-dom": "^17.0.2",
     "@typescript-eslint/eslint-plugin": "^4.27.0",
     "@typescript-eslint/parser": "^4.27.0",
     "autoprefixer": "^10.2.6",
