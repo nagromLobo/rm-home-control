@@ -33,6 +33,7 @@ defmodule HomeControlUi.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:cubdb, "~> 1.0.0"},
       {:dialyxir, "~> 1.1.0", only: [:dev], runtime: false},
       {:phoenix, "~> 1.5.9"},
       {:phoenix_live_dashboard, "~> 0.4"},

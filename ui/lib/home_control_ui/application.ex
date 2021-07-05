@@ -12,7 +12,8 @@ defmodule HomeControlUi.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: HomeControlUi.PubSub},
       # Start the Endpoint (http/https)
-      HomeControlUiWeb.Endpoint
+      HomeControlUiWeb.Endpoint,
+      HomeControlUi.KvStore,
       # Start a worker by calling: HomeControlUi.Worker.start_link(arg)
       # {HomeControlUi.Worker, arg}
     ]

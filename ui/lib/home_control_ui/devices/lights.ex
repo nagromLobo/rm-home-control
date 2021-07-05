@@ -1,6 +1,6 @@
 defmodule HomeControlUi.Devices.Lights do
-  @moduledoc """
-  The Devices context.
+   @moduledoc """
+  Service functions to manage light state
   """
 
   @doc """
@@ -24,20 +24,6 @@ defmodule HomeControlUi.Devices.Lights do
 
 
   @spec get_light(String.t()) :: {:ok, Light.t()}
-  @doc """
-  Gets a single light.
-
-  Raises `Ecto.NoResultsError` if the Light does not exist.
-
-  ## Examples
-
-      iex> get_light!(123)
-      %Light{}
-
-      iex> get_light!(456)
-      ** (Ecto.NoResultsError)
-
-  """
   def get_light(_id) do
     # get phillips hue lights
     {:ok, @mock_light}
@@ -45,18 +31,6 @@ defmodule HomeControlUi.Devices.Lights do
 
 
   @spec create_light(%{}) :: {:ok, Light.t()}
-  @doc """
-  Creates a light.
-
-  ## Examples
-
-      iex> create_light(%{field: value})
-      {:ok, %Light{}}
-
-      iex> create_light(%{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
   def create_light(_attrs \\ %{}) do
     # create light from phillips hue
     {:ok, @mock_light}
@@ -64,36 +38,12 @@ defmodule HomeControlUi.Devices.Lights do
 
 
   @spec update_light(Light.t(), %{}) :: {:ok, Light.t()}
-  @doc """
-  Updates a light.
-
-  ## Examples
-
-      iex> update_light(light, %{field: new_value})
-      {:ok, %Light{}}
-
-      iex> update_light(light, %{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
   def update_light(%Light{} = _light, _attrs) do
     # update a phillips hue light
     {:ok, @mock_light}
   end
 
   @spec delete_light(Light.t()) :: {:ok, Light.t()}
-  @doc """
-  Deletes a light.
-
-  ## Examples
-
-      iex> delete_light(light)
-      {:ok, %Light{}}
-
-      iex> delete_light(light)
-      {:error, %Ecto.Changeset{}}
-
-  """
   def delete_light(%Light{} = _light) do
     # delete phillips hue light
     {:ok, @mock_light}
