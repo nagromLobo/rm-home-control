@@ -1,4 +1,4 @@
-defmodule HomeControlUi.Settings.Bridge do
+defmodule HomeControlUi.Bridges.Bridge do
   @moduledoc """
   Representation of a bridge used for communicating with IOT devices
   """
@@ -6,6 +6,7 @@ defmodule HomeControlUi.Settings.Bridge do
 
   typedstruct enforce: true do
     field :token, String.t()
-    field :timestamp, integer()
+    field :type, atom()
+    field :created_at, integer()
   end
 end
