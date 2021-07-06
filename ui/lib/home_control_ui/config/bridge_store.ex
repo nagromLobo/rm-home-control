@@ -1,4 +1,4 @@
-defmodule HomeControlUi.Bridges.Store do
+defmodule HomeControlUi.Config.BridgeStore do
   alias HomeControlUi.Bridges.Bridge
   alias HomeControlUi.KvStore
   @doc """

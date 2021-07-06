@@ -42,7 +42,8 @@ defmodule HomeControlUi.MixProject do
       {:httpoison, "~> 1.8"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
-      {:typed_struct, "~> 0.2.1"}
+      {:typed_struct, "~> 0.2.1"},
+      { :uuid, "~> 1.1" }
     ]
   end
 

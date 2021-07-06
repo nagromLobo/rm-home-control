@@ -12,6 +12,8 @@ defmodule HomeControlUiWeb.Router do
   scope "/api", HomeControlUiWeb do
     pipe_through :api
     resources "/lights", LightController, except: [:new, :edit]
+    resources "/hue-bridges", BridgeController, only: [:index, :show]
+    post "/hue-bridges/sync", BridgeController, :sync_hue
   end
 
   # entry points
