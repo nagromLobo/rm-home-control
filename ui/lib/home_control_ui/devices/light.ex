@@ -6,6 +6,7 @@ defmodule HomeControlUi.Devices.Light do
 
   typedstruct enforce: true do
     field :id, String.t()
+    field :internal_id, String.t()
     field :name, String.t()
     field :is_on, boolean()
     field :provider, String.t()

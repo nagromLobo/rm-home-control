@@ -1,34 +1,40 @@
 defmodule HomeControlUi.Devices.Lights do
-   @moduledoc """
+  alias HomeControlUi.Devices.Light
+  alias HomeControlUi.Config.Bridges
+  alias HomeControlUi.HueApi.Lights, as: HueLights
+
+  @moduledoc """
   Service functions to manage light state
   """
 
-  @doc """
-  Returns the list of lights.
+  @mock_light %Light{
+    id: "hue-123",
+    internal_id: "123",
+    name: "test light",
+    is_on: true,
+    provider: :hue
+  }
 
-  ## Examples
-
-      iex> list_lights()
-      [%Light{}, ...]
-
-  """
-  alias HomeControlUi.Devices.Light
-
-  @mock_light %Light{id: "123", name: "test light", is_on: true, provider: "hue"}
+  defp from_hue_light(hue_light) do
+    %Light{
+      id: "hue-" <> hue_light.id,
+      internal_id: hue_light.id,
+      name: hue_light.name,
+      is_on: hue_light.state.on,
+      provider: :hue
+    }
+  end
 
   @spec list_lights() :: [Light.t()]
   def list_lights() do
-    [@mock_light]
-    ## get lights from phillips hue
+    Enum.map(HueLights.list(Bridges.get_hue_token()), &from_hue_light/1)
   end
-
 
   @spec get_light(String.t()) :: {:ok, Light.t()}
-  def get_light(_id) do
-    # get phillips hue lights
-    {:ok, @mock_light}
+  def get_light(id) do
+    # TODO optimize to single light call
+    {:ok, Enum.find(list_lights(), fn %Light{id: lightId} -> id === lightId end)}
   end
-
 
   @spec create_light(%{}) :: {:ok, Light.t()}
   def create_light(_attrs \\ %{}) do
@@ -36,11 +42,17 @@ defmodule HomeControlUi.Devices.Lights do
     {:ok, @mock_light}
   end
 
-
   @spec update_light(Light.t(), %{}) :: {:ok, Light.t()}
-  def update_light(%Light{} = _light, _attrs) do
-    # update a phillips hue light
-    {:ok, @mock_light}
+  def update_light(%Light{} = light, updates) do
+    # TODO support partial updates and more generic field updates
+    case light.provider do
+      :hue ->
+        case HueLights.patch_state(Bridges.get_hue_token(), light.internal_id, %{
+               on: updates.is_on
+             }) do
+          {:full, _} -> {:ok, Map.put(light, :is_on, updates.is_on)}
+        end
+    end
   end
 
   @spec delete_light(Light.t()) :: {:ok, Light.t()}

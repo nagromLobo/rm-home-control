@@ -22,7 +22,7 @@ export const request = async <T>({ url, method = 'GET', body }: FetchConfig): Pr
     const response = await fetch(url, {
       method,
       ...(body && {
-        Headers: {
+        headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(body),

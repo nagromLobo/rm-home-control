@@ -1,27 +1,41 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import Loading from '../../shared/layout/components/Loading';
-import { useLightQuery, useLightsQuery } from '../remoteState';
+import { useLightsQuery, useUpdateLightMutation } from '../remoteState';
 import { LightType } from '../types';
-import LightInfo from './LightInfo';
+
+import styles from './Lights.module.less';
+
+type LightButtonProps = {
+  light: LightType;
+};
+
+const LightButton = ({ light }: LightButtonProps) => {
+  const { mutate: update } = useUpdateLightMutation(light.id);
+  return (
+    <button
+      type='button'
+      key={light.id}
+      onClick={() => update({ is_on: !light.is_on })}
+      className={`${styles.light} ${light.is_on ? styles.on : ''}`}
+    >
+      {light.name}
+    </button>
+  );
+};
 
 const Lights = () => {
-  const [selectedLight, setSelectedLight] = useState<LightType | null>(null);
-
   const { data: lights, isLoading: areLightsLoading } = useLightsQuery();
-  const { data: lightDetails } = useLightQuery(selectedLight?.id);
+  // const { data: lightDetails } = useLightQuery(selectedLight?.id);
 
   if (areLightsLoading) {
     return <Loading />;
   }
   return (
     <div>
-      {lightDetails && <LightInfo light={lightDetails} />}
-      <div>
+      <div className={styles.lights}>
         {lights.map((light) => (
-          <button type='button' key={light.id} onClick={() => setSelectedLight(light)}>
-            {JSON.stringify(light)}
-          </button>
+          <LightButton key={light.id} light={light} />
         ))}
       </div>
     </div>
