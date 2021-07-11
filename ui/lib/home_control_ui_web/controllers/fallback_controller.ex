@@ -14,10 +14,10 @@ defmodule HomeControlUiWeb.FallbackController do
     |> render(:"404")
   end
 
-  def call(conn, {:error, %{type: :hue, message: message}}) do
+  def call(conn, {:error, %{type: :hue, errors: errors}}) do
     conn
     |> put_status(:internal_server_error)
     |> put_view(HomeControlUiWeb.ErrorView)
-    |> render("hue_error.json", %{message: message})
+    |> render("hue_error.json", %{messages: Enum.map(errors, & &1["description"])})
   end
 end

@@ -6,8 +6,8 @@ defmodule HomeControlUiWeb.ErrorView do
   end
 
   # TODO support communicating multiple hue errors
-  def render("hue_error.json", %{message: message}) do
-    %{errors: [%{message: message}]}
+  def render("hue_error.json", %{errors: messages}) do
+    %{errors: Enum.map(messages, fn msg -> %{message: msg} end)}
   end
 
   # By default, Phoenix returns the status message from

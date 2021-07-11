@@ -3,6 +3,7 @@ defmodule HomeControlUiWeb.LightController do
 
   alias HomeControlUi.Devices.Lights
   alias HomeControlUi.Devices.Light
+  alias HomeControlUi.Utils.Maps
 
   action_fallback HomeControlUiWeb.FallbackController
 
@@ -26,9 +27,9 @@ defmodule HomeControlUiWeb.LightController do
     end
   end
 
-  def update(conn, %{"id" => id, "light" => light_params}) do
+  def update(conn, %{"id" => id} = params) do
     with {:ok, %Light{} = light} <- Lights.get_light(id),
-         {:ok, %Light{} = updated} <- Lights.update_light(light, light_params) do
+         {:ok, %Light{} = updated} <- Lights.update_light(light, Maps.atomize_keys(params)) do
       render(conn, "show.json", light: updated)
     end
   end

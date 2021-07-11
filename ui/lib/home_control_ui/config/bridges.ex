@@ -1,5 +1,5 @@
 defmodule HomeControlUi.Config.Bridges do
-  alias HomeControlUi.Config.BridgeHueRemote
+  alias HomeControlUi.HueAPI.Bridges, as: HueBridges
   alias HomeControlUi.Config.BridgeStore
   alias HomeControlUi.Config.Bridge
 
@@ -15,7 +15,7 @@ defmodule HomeControlUi.Config.Bridges do
   button on the hue bridge to work
   """
   def try_connect_hue_bridge() do
-    with {:ok, token} <- BridgeHueRemote.create_new_bridge_connection() do
+    with {:ok, token} <- HueBridges.new_connection() do
       BridgeStore.put_hue_bridge(%Bridge{
         id: UUID.uuid4(),
         token: token,
@@ -31,5 +31,12 @@ defmodule HomeControlUi.Config.Bridges do
   """
   def get_hue_bridge() do
     {:ok, BridgeStore.get_hue_bridge()}
+  end
+
+  def get_hue_token() do
+    case get_hue_bridge() do
+      {:ok, %Bridge{token: token}} -> token
+      _ -> nil
+    end
   end
 end

@@ -5,15 +5,23 @@ defmodule HomeControlUiWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :hue_context do
+    plug HomeControlUiWeb.Plugs.RequireHueBridge
+  end
+
   pipeline :browser do
     plug :accepts, ["html"]
   end
 
   scope "/api", HomeControlUiWeb do
     pipe_through :api
-    resources "/lights", LightController, except: [:new, :edit]
     resources "/hue-bridges", BridgeController, only: [:index, :show]
     post "/hue-bridges/sync", BridgeController, :sync_hue
+  end
+
+  scope "/api", HomeControlUiWeb do
+    pipe_through [:api, :hue_context]
+    resources "/lights", LightController, except: [:new, :edit]
   end
 
   # entry points
