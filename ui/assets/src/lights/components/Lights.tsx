@@ -32,12 +32,10 @@ const Lights = () => {
     return <Loading />;
   }
   return (
-    <div>
-      <div className={styles.lights}>
-        {lights.map((light) => (
-          <LightButton key={light.id} light={light} />
-        ))}
-      </div>
+    <div className={styles.lights}>
+      {lights.map((light) => (
+        <LightButton key={light.id} light={light} />
+      ))}
     </div>
   );
 };
